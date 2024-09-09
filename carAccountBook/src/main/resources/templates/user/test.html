@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<table id="userTable">
+    <thead>
+    <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>User Status</th>
+        <th>Super User</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${userList}">
+        <td th:text="${user.email}">emil</td>
+        <td th:text="${user.fullNmKr}">name</td>
+        <td th:text="${user.userStatCd}">stat</td>
+        <td th:text="${user.superUser}">super</td>
+    </tr>
+    </tbody>
+</table>

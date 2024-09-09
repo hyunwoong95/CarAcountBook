@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_FORMAT">%d{yyyy-MM-dd HH:mm} [%-5p%x] [%c:%L] %m%n</Property>
+        <Property name="BASE_DIR">/logs</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_FORMAT}"/>
+        </Console>
+        <RollingFile name="RollingFile"
+                     fileName="${BASE_DIR}/carAccountBook.log"
+                     filePattern="${BASE_DIR}/car.%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${LOG_FORMAT}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile" />
+        </Root>
+
+        <!-- SQL Logger -->
+        <logger name="jdbc.connection" level="off" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile" />
+        </logger>
+
+        <logger name="jdbc.audit" level="off" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile" />
+        </logger>
+
+        <logger name="jdbc.resultset" level="off" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile" />
+        </logger>
+
+        <logger name="jdbc.sqlonly" level="off" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile" />
+        </logger>
+
+        <logger name="jdbc.resultsettable" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile" />
+        </logger>
+
+        <logger name="jdbc.sqltiming" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile" />
+        </logger>
+
+        <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="debug">
+        </logger>
+
+        <!--sql log-->
+        <Logger name="org.mybatis.mapper.UserMapper" level="trace"/>
+        <Root level="error" >
+            <AppenderRef ref="stdout"/>
+        </Root>
+    </Loggers>
+</Configuration>
